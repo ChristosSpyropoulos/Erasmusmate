@@ -33,11 +33,12 @@ def view_flat(request, id):
     args = {'flat': flat}
     return render(request, 'flats/flat.html', args)
 
+
 def my_flat(request):
-    if request.user.FlatProfile:
-        return redirect(reverse('flats:edit_flat'))
-    else:
+    if not FlatProfile.objects.filter(user__username=request.user.username):
         return redirect(reverse('flats:create_flat'))
+    else:
+        return redirect(reverse('flats:edit_flat'))
 
 
 def create_flat(request):

@@ -53,14 +53,3 @@ class FlatProfile(models.Model):
 
     def __str__(self):
         return "Flat: {0}".format(self.name)
-
-def create_profile(sender, **kwargs):
-    if kwargs['created']:   #if the user has been crated
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])   #then i am gonna create a user profile
-
-post_save.connect(create_profile, sender=User)
-
-# i dont know if we need this
-#@receiver(post_save, sender=User)
-#def save_user_profile(sender, instance, **kwargs):
-    #instance.userprofile.save()

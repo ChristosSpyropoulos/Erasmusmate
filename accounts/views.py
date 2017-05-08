@@ -66,7 +66,7 @@ def view_profile(request, pk=None): #pk is not Required
 
 #@login_required     #this is a decorator
 def view_list_accounts(request):
-    args = {'users': UserProfile.objects.all()}
+    args = {'users': User.objects.all()}
     return render(request, 'accounts/list_mates.html', args)
 
 #@login_required
