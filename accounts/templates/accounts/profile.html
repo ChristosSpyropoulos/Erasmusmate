@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <h1>Profile</h1>
+  <p>Username: <b>{{ user }}</b></p>
+  <p>First_name: <b>{{ user.first_name }}</b></p>
+  <p>Last_name: <b>{{ user.last_name }}</b></p>
+  <p>Email: <b>{{ user.email }}</b></p>
+  <p>Phone number: <b>{{ user.userprofile.phone }}</b></p>
+  <p>Sex: <b>{{ user.userprofile.sex }}</b></p>
+  <p>Age: <b>{{ user.userprofile.age }}</b></p>
+  <p>Country of Origin: <b>{{ user.userprofile.country_of_origin }}</b></p>
+  <p>Country of Studies: <b>{{ user.userprofile.country_of_studies }}</b></p>
+  <p>City of Studies: <b>{{ user.userprofile.city_of_studies }}</b></p>
+  <p>Region of City: <b>{{ user.userprofile.region }}</b></p>
+  <p>University: <b>{{ user.userprofile.university }}</b></p>
+  <p>Faculty: <b>{{ user.userprofile.faculty }}</b></p>
+  <p>Time staying in Flat: <b>{{ user.userprofile.time_of_staying_in_flat }}</b></p>
+  <p>Smoker: <b>{{ user.userprofile.smoker }}</b></p>
+  <p>Men/Women in room: <b>{{ user.userprofile.men_or_women_on_room }}</b></p>
+  <p>Prefered same nationality roommates: <b>{{ user.userprofile.same_nationality_roommates }}</b></p>
+  <p>Prefered Number of people in room: <b>{{ user.userprofile.num_of_people_on_room }}</b></p>
+  <p>Prefered_cuisine: <b>{{ user.userprofile.prefered_cuisine }}</b></p>
+
+  {% if user.userprofile.image %}
+  <img src="{{ user.userprofile.image.url }}"  width = "150" height = "150"/>
+
+  {% endif %}
+  <p> </p>
+
+
+</div>
+
+{% endblock %}

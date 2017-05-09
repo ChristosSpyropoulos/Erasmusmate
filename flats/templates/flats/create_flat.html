@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Create Flat</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+  <h1>Create Flat</h1>
+  <form method="post">
+    <!--cross site request forgery = csrf-->
+    {% csrf_token %}
+    {{ form.as_p }} <!--form as paragraph for username and password-->
+    <button type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}

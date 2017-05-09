@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Find A Flat</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Erasmus mates</h1>
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}"/>
+        <input type="submit" value="Search"/>
+    </form>
+    {% for user in users %}
+        <h3>{{ user }}</h3>
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.last_name }}</p>
+        <p><a href="{% url 'accounts:view_profile_with_pk' user.id %}">Show profile</a>
+        {% empty %}
+        <p>No user available.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
