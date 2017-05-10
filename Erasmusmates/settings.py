@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'Erasmusmates.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-"""DATABASES = {
+"""db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)"""
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd9kdj2mvgg9cra',
@@ -87,7 +87,7 @@ DATABASES['default'].update(db_from_env)
         'HOST': 'ec2-23-23-228-115.compute-1.amazonaws.com',
         'PORT': '5432',
     }
-}"""
+}
 
 """DATABASES = {
     'default': {
