@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 from home.forms import HomeForm
 from home.models import Post
 from django.contrib.auth.models import User
-
 
 class HomeView(TemplateView):
     template_name = 'home/home.html'

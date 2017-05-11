@@ -68,7 +68,7 @@ def view_profile(request, pk=None): #pk is not Required
 
 #@login_required     #this is a decorator
 def view_list_accounts(request):
-    queryset_list = UserProfile.objects.all()
+    queryset_list = User.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
