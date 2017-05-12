@@ -76,7 +76,7 @@ def edit_flat(request):
         flat_form = EditFlatForm(request.POST, instance=request.user.flatprofile)
         if flat_form.is_valid():
             flat_form.save()
-            return redirect(reverse('flats:view_flat'))
+            return redirect(reverse('flats:view_list_flats'))
 
     else:   #method == 'GET'
         flat_form = EditFlatForm(instance=request.user.flatprofile)
