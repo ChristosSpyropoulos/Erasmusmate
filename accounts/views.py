@@ -60,15 +60,15 @@ def register(request):
 #@login_required     #this is a decorator
 def view_profile(request, pk=None): #pk is not Required
     if pk:
-        user = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(UserProfile, pk=pk)
     else:
         user = request.user
     args = {'user': user}
-    return render(request, 'accounts/profile.html',args)
+    return render(request, 'accounts/profile.html', args)
 
 #@login_required     #this is a decorator
 def view_list_accounts(request):
-    queryset_list = User.objects.all()
+    queryset_list = UserProfile.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
