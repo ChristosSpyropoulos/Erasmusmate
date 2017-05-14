@@ -5,16 +5,20 @@ from django.test import TestCase
 from flats.models import FlatProfile
 from django.contrib.auth.models import User
 
+import datetime
+
+
 class FlatProfileTestCase(TestCase):
-        def SetUp(self):
-            user = User.objects.create(username="testuser")
-            flat = FlatProfile.objects.create(user=user)
+        def setUp(self):
+            self.user = User.objects.create(username="testuser")
+            self.flat = FlatProfile.objects.create(user=self.user, name="testflat")
+            self.date = datetime.datetime.now()
+
 
         def test_default_values(self):
-            self.assertEqual(user, self.flat.user)
+            self.assertEqual(self.user, self.flat.user)
 
-            self.assertIsNotNone(self.flat.name)
-            self.assertTrue(len(self.flat.name)>1)
+            self.assertEqual(self.flat.name, "testflat")
 
             self.assertIsNone(self.flat.description)
 
@@ -39,4 +43,9 @@ class FlatProfileTestCase(TestCase):
             self.asserEqual(self.flat.couples_accepted, "Don't care")
 
             self.assertIsNone(self.flat.image)
-            
+
+            self.assertAlmostEqual(self.flat.date, self.date)
+
+
+        def test_str(self):
+            self.assertEqual(self.flat.__str__(), "Flat: testflat")
