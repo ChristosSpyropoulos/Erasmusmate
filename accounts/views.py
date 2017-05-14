@@ -24,32 +24,30 @@ from django.conf import settings
 from django.db import transaction
 
 
-#def home(request):
-    #numbers =[1,2,3,4,5]
-    #name = "George Tsik"
-
-    #args = {'myName': name, 'numbers': numbers}
-
-    #return render(request, 'accounts/home.html',args)
-
-
+# def home(request):
+#     numbers =[1,2,3,4,5]
+#     name = "George Tsik"
+#
+#     args = {'myName': name, 'numbers': numbers}
+#
+#     return render(request, 'accounts/home.html',args)
 
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             print "Form is validated"
-            #form.save()
+            # form.save()
             user = form.save()
-            #user.refresh_from_db()
-            #user.userprofile.city_of_studies = form.cleaned_data.get('city')
-            #user.save()
+            # user.refresh_from_db()
+            # user.userprofile.city_of_studies = form.cleaned_data.get('city')
+            # user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
-            login(request, user)    #login after register automatically
+            login(request, user)    # login after register automatically
             return redirect(reverse('home:home'))
-        #else:
-            #print formset.errors
+        # else:
+        #     print formset.errors
 
     else:
         form = RegistrationForm()
@@ -57,37 +55,41 @@ def register(request):
         args = {'form': form}
         return render(request, 'accounts/reg_form.html',args)
 
-#@login_required     #this is a decorator
-def view_profile(request, pk=None): #pk is not Required
+
+# @login_required     #this is a decorator
+def view_profile(request, pk=None):  # pk is not Required
     if pk:
-        user = get_object_or_404(UserProfile, pk=pk)
+        user = get_object_or_404(User, pk=pk)
     else:
         user = request.user
     args = {'user': user}
     return render(request, 'accounts/profile.html', args)
 
-#@login_required     #this is a decorator
+
+# @login_required     #this is a decorator
 def view_list_accounts(request):
-    queryset_list = UserProfile.objects.all()
     query = request.GET.get("q")
     if query:
-        queryset_list = queryset_list.filter(
-            Q(user__username__icontains=query) |
-            Q(user__first_name__icontains=query) |
-            Q(user__last_name__icontains=query) |
-            Q(user__email__icontains=query) |
-            Q(country_of_origin__icontains=query) |
-            Q(country_of_studies__icontains=query) |
-            Q(region__icontains=query) |
-            Q(university__icontains=query) |
-            Q(faculty__icontains=query) |
-            Q(description__icontains=query) |
-            Q(city_of_studies__icontains=query)
+        queryset_list = User.objects.filter(
+            Q(username__icontains=query) |
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query) |
+            Q(email__icontains=query) |
+            Q(userprofile__country_of_origin__icontains=query) |
+            Q(userprofile__country_of_studies__icontains=query) |
+            Q(userprofile__region__icontains=query) |
+            Q(userprofile__university__icontains=query) |
+            Q(userprofile__faculty__icontains=query) |
+            Q(userprofile__description__icontains=query) |
+            Q(userprofile__city_of_studies__icontains=query)
         )
+    else:
+        queryset_list = User.objects.all()
     args = {'users': queryset_list}
     return render(request, 'accounts/list_mates.html', args)
 
-#@login_required
+
+# @login_required
 @transaction.atomic
 def edit_profile(request):
     if request.method == 'POST':
@@ -98,33 +100,36 @@ def edit_profile(request):
             profile_form.save()
             return redirect(reverse('accounts:view_profile'))
 
-    else:   #method == 'GET'
+    else:   # method == 'GET'
         form = EditProfileForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.userprofile)
 
         args = {'form': form, 'profile_form': profile_form}
         return render(request, 'accounts/edit_profile.html', args)
 
-#@login_required
+
+# @login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data = request.POST, user=request.user)
 
         if form.is_valid():
-            form.save();
+            form.save()
             update_session_auth_hash(request, form.user)
-            #return redirect('/account/profile')
+            # return redirect('/account/profile')
             return redirect(reverse('accounts:view_profile'))
         else:
-            #return redirect('/account/change-password')
+            # return redirect('/account/change-password')
             return redirect(reverse('accounts:change_password'))
 
-    else:   #method == 'GET'
+    else:   # method == 'GET'
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
 
+
 def get_user_profile(request, username):
     user = User.objects.get(username=username)
     return render(request, 'accounts/user_profile.html', {'user':user})
-    #mporei na einai {'user':request.user ;h 'user':userprofile}
+    # mporei na einai {'user':request.user ;h 'user':userprofile}
+
