@@ -8,20 +8,21 @@ from home.forms import HomeForm
 from home.models import Post
 from django.contrib.auth.models import User
 
+
 class HomeView(TemplateView):
     template_name = 'home/home.html'
 
-    def get (self,request):    # overwrite get method from Class TemplateView
+    def get (self, request):    # overwrite get method from Class TemplateView
         form = HomeForm()
-        #posts = Post.objects.all()
+        # posts = Post.objects.all()
         posts = Post.objects.all().order_by('-created')
-        #users = User.objects.all()
+        # users = User.objects.all()
         users = User.objects.exclude(id=request.user.id)
 
         args = {'form':form, 'posts':posts, 'users': users}
         return render(request, self.template_name, args)
 
-    def post(self,request):
+    def post(self, request):
         form = HomeForm(request.POST)#fill the form with the data received from the post request
         if form.is_valid():
             post = form.save(commit=False) #we have already associated the form with the model, so the data will be stored in the DB

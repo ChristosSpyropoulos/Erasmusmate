@@ -1,20 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.db.models import Q
-
-from accounts.forms import (
-    RegistrationForm,
-    EditProfileForm,
-    ProfileForm,
-)
-from accounts.models import UserProfile
-from django.shortcuts import (
-    render,
-    HttpResponse,
-    redirect,
-    get_object_or_404,
-)
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from accounts.forms import RegistrationForm,EditProfileForm,ProfileForm
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash,login, authenticate    #after changing password user , we want to remain logged in
@@ -85,6 +74,18 @@ def view_list_accounts(request):
         )
     else:
         queryset_list = User.objects.all()
+
+    paginator = Paginator(queryset_list, 3)
+    page = request.GET.get('page')
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset_list = paginator.page(paginator.num_pages)
+
     args = {'users': queryset_list}
     return render(request, 'accounts/list_mates.html', args)
 

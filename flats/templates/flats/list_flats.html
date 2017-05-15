@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load urls %}
 
 {% block head %}
 <title>Find A Flat</title>
@@ -14,21 +14,27 @@
         <input type="submit" value="Search"/>
     </form>
     {% for flat in Flats %}
-
-
-    <h3>{{ flat.name }}</h3>
-
-    <p>{{ flat.description|truncatewords_html:80 }}</p>
-
-    <p><a href="{% url 'flats:view_flat' flat.id %}">Show more</a>
-
+        <h3>{{ flat.name }}</h3>
+        <p>{{ flat.description|truncatewords_html:80 }}</p>
+        <p><a href="{% url 'flats:view_flat' flat.id %}">Show more</a>
     {% empty %}
-
-    <p>No flat available.</p>
-
+        <p>No flat available.</p>
     {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if Flats.has_previous %}
+                <a href="{% add_params request.get_full_path page=Flats.previous_page_number %}">previous</a>
+            {% endif %}
 
+            <span class="current">
+                Page {{ Flats.number }} of {{ Flats.paginator.num_pages }}.
+            </span>
 
+            {% if Flats.has_next %}
+                <a href="{% add_params request.get_full_path page=Flats.next_page_number %}">next</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 
 {% endblock %}
