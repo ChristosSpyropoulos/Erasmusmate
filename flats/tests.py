@@ -16,10 +16,9 @@ class FlatProfileTestCase(TestCase):
                             user=self.user,
                             name="testflat",
                             place="AGH",
-                            price=500,
                             time_of_staying_in_flat="1 MONTH",
-                            num_of_people_total="2",
-                            num_of_people_available="1"
+                            num_of_roommates="2",
+                            num_of_room_available="1"
                         )
             self.date = timezone.now()
 
@@ -35,17 +34,17 @@ class FlatProfileTestCase(TestCase):
 
             self.assertEqual(self.flat.adress, "")
 
-            self.assertEqual(self.flat.price, 500)
+            self.assertEqual(self.flat.price, 0)
 
-            self.assertEqual(self.flat.smoker, "Don't care")
+            self.assertEqual(self.flat.smoking_permitted, "Don't care")
 
             self.assertEqual(self.flat.same_nationality_roommates, "Don't care")
 
             self.assertIn(self.flat.time_of_staying_in_flat, dict(FlatProfile.TIME_CHOICES))
 
-            self.assertIn(self.flat.num_of_people_total, dict(FlatProfile.NUM_OF_PEOPLE_CHOICES))
+            self.assertIn(self.flat.num_of_roommates, dict(FlatProfile.NUM_OF_PEOPLE_CHOICES))
 
-            self.assertIn(self.flat.num_of_people_available, dict(FlatProfile.NUM_OF_PEOPLE_CHOICES))
+            self.assertIn(self.flat.num_of_room_available, dict(FlatProfile.NUM_OF_PEOPLE_CHOICES))
 
             self.assertEqual(self.flat.men_or_women_on_room, "Don't care")
 
@@ -57,7 +56,7 @@ class FlatProfileTestCase(TestCase):
 
 
         def test_str(self):
-            self.assertEqual(self.flat.__str__(), "Flat: testflat")
+            self.assertEqual(self.flat.__str__(), "Flat of testuser")
 
 class FlatsTestCase(TestCase):
     def setUp(self):
@@ -73,8 +72,8 @@ class FlatsTestCase(TestCase):
                         place="AGH",
                         price=500,
                         time_of_staying_in_flat="1 MONTH",
-                        num_of_people_total="2",
-                        num_of_people_available="1"
+                        num_of_roommates="2",
+                        num_of_room_available="1"
                     )
         self.flat2 = FlatProfile.objects.create(
                         user=self.user2,
@@ -82,8 +81,8 @@ class FlatsTestCase(TestCase):
                         place="AGH",
                         price=500,
                         time_of_staying_in_flat="1 MONTH",
-                        num_of_people_total="2",
-                        num_of_people_available="1"
+                        num_of_roommates="2",
+                        num_of_room_available="1"
                     )
         self.flat3 = FlatProfile.objects.create(
                         user=self.user3,
@@ -91,8 +90,8 @@ class FlatsTestCase(TestCase):
                         place="AGH",
                         price=500,
                         time_of_staying_in_flat="1 MONTH",
-                        num_of_people_total="2",
-                        num_of_people_available="1"
+                        num_of_roommates="2",
+                        num_of_room_available="1"
                     )
         self.flat4 = FlatProfile.objects.create(
                         user=self.user4,
@@ -100,8 +99,8 @@ class FlatsTestCase(TestCase):
                         place="AGH",
                         price=500,
                         time_of_staying_in_flat="1 MONTH",
-                        num_of_people_total="2",
-                        num_of_people_available="1"
+                        num_of_roommates="2",
+                        num_of_room_available="1"
                     )
 
 
@@ -142,8 +141,14 @@ class FlatsTestCase(TestCase):
                  'place': "AGH",
                  'price': 500,
                  'time_of_staying_in_flat': "1 MONTH",
-                 'num_of_people_total': "2",
-                 'num_of_people_available': "1"
+                 'num_of_roommates': "2",
+                 'num_of_room_available': "1",
+                 'hardworking': "Don't care",
+                 'partying': "Don't care",
+                 'traveling': "Don't care",
+                 'smoking_permitted': "Don't care",
+                 'same_nationality_roommates': "Don't care",
+                 'men_or_women_on_room': "Don't care",
         }
 
         response1 = self.client.get(reverse('flats:create_flat'))
@@ -158,10 +163,17 @@ class FlatsTestCase(TestCase):
         data = { 'name': "flat1 modified",
                  'place': "AGH",
                  'price': 1000,
-                 'time_of_staying_in_flat': "1 MONTH",
-                 'num_of_people_total': "2",
-                 'num_of_people_available': "1",
-                 'description': "test edit flat"
+                 'time_of_staying_in_flat': "2 MONTHS",
+                 'num_of_roommates': "2",
+                 'num_of_room_available': "1",
+                 'hardworking': "Don't care",
+                 'partying': "Don't care",
+                 'traveling': "Don't care",
+                 'smoking_permitted': "Don't care",
+                 'same_nationality_roommates': "Don't care",
+                 'men_or_women_on_room': "Don't care",
+                 'couples_accepted': "Don't care",
+                 'description': "flat of user1",
         }
 
         response1 = self.client.get(reverse('flats:edit_flat'))

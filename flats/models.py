@@ -15,7 +15,6 @@ class FlatProfile(Profile):
         ("No", "No")
     )
     NUM_OF_PEOPLE_CHOICES = (
-        ("Don't care", "Don't care" ),
         ("1", "1"),
         ("2", "2"),
         ("3", "3"),

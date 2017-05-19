@@ -87,6 +87,9 @@ DATABASES = {
         'PASSWORD': 'af5cc3971a1ddc5cf2b8e4074c63d3cca22f53ff03402e5419f522170f4c5fc5',
         'HOST': 'ec2-23-23-228-115.compute-1.amazonaws.com',
         'PORT': '5432',
+        'TEST': {
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
 }
 
