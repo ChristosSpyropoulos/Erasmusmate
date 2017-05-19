@@ -59,13 +59,17 @@ class ProfileForm(forms.ModelForm):
             'university',
             'faculty',
 
-            'time_of_staying_in_flat',
-            'max_price',
+            'hardworking',
+            'partying',
+            'traveling',
 
-            'smoker',
+            'time_of_staying_in_flat',
+            'price',
+
+            'smoking_permitted',
             'men_or_women_on_room',
             'same_nationality_roommates',
-            'num_of_people_on_room',
+            'num_of_roommates',
             'prefered_cuisine',
 
             'description',
