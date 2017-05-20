@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load urls %}
+
+{% block head %}
+<title>Find A Mate</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Erasmus mates</h1>
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}"/>
+        <input type="submit" value="Search"/>
+    </form>
+    {% for user in users %}
+        <h3>{{ user }}</h3>
+        <p>{{ user.first_name }}</p>
+        <p>{{ user.last_name }}</p>
+        <p><a href="{% url 'accounts:view_profile_with_pk' user.id %}">Show profile</a>
+        {% empty %}
+        <p>No user available.</p>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if users.has_previous %}
+                <a href="{% add_params request.get_full_path page=users.previous_page_number %}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ users.number }} of {{ users.paginator.num_pages }}.
+            </span>
+
+            {% if users.has_next %}
+                <a href="{% add_params request.get_full_path page=users.next_page_number %}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %}

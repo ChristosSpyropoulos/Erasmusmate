@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Find A Flat</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <h1>{{flat.name}}</h1>
+  <h2>Published on : {{flat.date}} by {{flat.user}}</h2>
+
+  <p>Description : <b>{{ flat.description }}</b></p>
+  <p>Localisation : <b>{{ flat.place }}</b></p>
+  <p>Adress : <b>{{ flat.adress }}</b></p>
+  <p>Price : <b>{{ flat.price }}</b></p>
+  <p>Smoker : <b>{{ flat.smoker }}</b></p>
+  <p>Prefer same nationality : <b>{{ flat.same_nationality_roommates }}</b></p>
+  <p>Duration : <b>{{ flat.time_of_staying_in_flat }}</b></p>
+  <p>Total number of rooms : <b>{{ flat.num_of_people_total }}</b></p>
+  <p>Number of available rooms : <b>{{ flat.num_of_people_availablen }}</b></p>
+  <p>Only for women or men :<b>{{ flat.men_or_women_on_room }}</b></p>
+  <p>couples accepted : <b>{{ flat.couples_accepted }}</b></p>
+
+  {% if flat.image %}
+  <img src="{{ flat.image.url }}"  width = "150" height = "150"/>
+  {% endif %}
+  <p> </p>
+
+
+</div>
+
+{% endblock %}

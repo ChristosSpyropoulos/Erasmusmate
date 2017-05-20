@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Edit Flat</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+  <h1>Edit Flat</h1>
+  <form  method="post">
+    {% csrf_token %}
+    {{ flat_form.as_p }}
+    <button type="submit">Submit</button>
+    <br>
+  </form>
+</div>
+{% endblock %}

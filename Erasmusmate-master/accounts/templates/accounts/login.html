@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Login</title>  <!--tab name-->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>Welcome</h1>
+  <p>
+    You can login here
+  </p>
+  <h2>Login</h2>
+  <form method="post">
+    <!--cross site request forgery = csrf-->
+    {% csrf_token %}
+    {{ form.as_p }} <!--form as paragraph for username and password-->
+    <button type="submit">Login</button>
+  </form>
+</div>
+{% endblock %}
