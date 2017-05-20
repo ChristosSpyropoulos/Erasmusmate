@@ -35,8 +35,5 @@ urlpatterns = [
     url(r'^reset-password/complete/$', password_reset_complete,{'template_name':
     'accounts/reset_password_complete.html'},name='password_reset_complete'),
 
-    url(r'^profile/(?P<username>[a-zA-Z0-9]+)/$',views.get_user_profile, name = 'get_user_profile'),
-
-
 
 ]
