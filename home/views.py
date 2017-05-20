@@ -21,14 +21,14 @@ class HomeView(TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
-        form = HomeForm(request.POST)#fill the form with the data received from the post request
+        form = HomeForm(request.POST)      #fill the form with the data received from the post request
         if form.is_valid():
             post = form.save(commit=False) #we have already associated the form with the model, so the data will be stored in the DB
             post.user = request.user
             post.save()
 
-            text = form.cleaned_data['post'] #post is from forms.py
-            form = HomeForm()#get an empty form
+            text = form.cleaned_data['post']    #post is from forms.py
+            form = HomeForm()                   #get an empty form
             return redirect('home:home')
 
         args = {'form': form, 'text': text}
