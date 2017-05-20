@@ -72,4 +72,5 @@ class ProfileForm(forms.ModelForm):
             'prefered_cuisine',
 
             'description',
+            'image',
         )

@@ -14,10 +14,8 @@ class HomeView(TemplateView):
 
     def get (self, request):    # overwrite get method from Class TemplateView
         form = HomeForm()
-        # posts = Post.objects.all()
-        posts = Post.objects.all().order_by('-created')
-        # users = User.objects.all()
-        users = User.objects.exclude(id=request.user.id)
+        posts = Post.objects.all().order_by('-created')[:5]         #show 5 latest posts
+        users = User.objects.exclude(id=request.user.id)[:5]        #show 5 newest users
 
         args = {'form':form, 'posts':posts, 'users': users}
         return render(request, self.template_name, args)
@@ -35,6 +33,3 @@ class HomeView(TemplateView):
 
         args = {'form': form, 'text': text}
         return render(request, self.template_name, args)
-
-    def change_friends(request, operation, pk):
-        return redirect('home:home')
