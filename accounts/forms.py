@@ -73,5 +73,4 @@ class ProfileForm(forms.ModelForm):
 
             'description',
             'image',
-
         )

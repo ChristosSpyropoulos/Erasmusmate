@@ -18,13 +18,11 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             print "Form is validated"
-
             user = form.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)    # login after register automatically
             return redirect(reverse('home:home'))
-
     else:
         form = RegistrationForm()
 

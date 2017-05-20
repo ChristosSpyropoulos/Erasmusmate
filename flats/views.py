@@ -72,7 +72,6 @@ def create_flat(request):
         return render(request, 'flats/create_flat.html',args)
 
 
-
 @transaction.atomic
 def edit_flat(request):
     if request.method == 'POST':
