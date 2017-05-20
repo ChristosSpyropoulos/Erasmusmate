@@ -14,7 +14,6 @@ from django.conf import settings
 from django.db import transaction
 
 
-# @login_required     #this is a decorator
 def view_list_flats(request):
     query = request.GET.get("q")
     if query:
@@ -73,7 +72,7 @@ def create_flat(request):
         return render(request, 'flats/create_flat.html',args)
 
 
-# @login_required
+
 @transaction.atomic
 def edit_flat(request):
     if request.method == 'POST':

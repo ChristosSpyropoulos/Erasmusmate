@@ -6,7 +6,6 @@ from models import UserProfile
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    #city_of_studies = forms.CharField(required=False)  #this feature belongs to our model UserProfile
 
     class Meta:
         model = User
@@ -73,4 +72,6 @@ class ProfileForm(forms.ModelForm):
             'prefered_cuisine',
 
             'description',
+            'image',
+
         )
