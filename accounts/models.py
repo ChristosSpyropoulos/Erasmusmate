@@ -100,8 +100,3 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])   #then i am gonna create a user profile
 
 post_save.connect(create_profile, sender=User)
-
-# i dont know if we need this
-#@receiver(post_save, sender=User)
-#def save_user_profile(sender, instance, **kwargs):
-    #instance.userprofile.save()

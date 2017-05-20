@@ -18,23 +18,16 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             print "Form is validated"
-            # form.save()
             user = form.save()
-            # user.refresh_from_db()
-            # user.userprofile.city_of_studies = form.cleaned_data.get('city')
-            # user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)    # login after register automatically
             return redirect(reverse('home:home'))
-        # else:
-        #     print formset.errors
-
     else:
         form = RegistrationForm()
 
-        args = {'form': form}
-        return render(request, 'accounts/reg_form.html',args)
+    args = {'form': form}
+    return render(request, 'accounts/reg_form.html',args)
 
 
 def view_profile(request, pk=None):  # pk is not Required
