@@ -4,12 +4,35 @@
 <div class="container">
 
   <div class="col-md-8">
+    <style>
+    h1 {
+
+         color: MidnightBlue ;
+        text-align: left;
+         text-transform: uppercase;
+         font-size: 30px;
+    }
+
+    h2{
+      color: MidnightBlue ;
+      font-size: 30px;
+
+    }
+     button{
+    font-size: 28px;
+    position: absolute;
+    top: 120px;
+    left: 650px;
+     }
+
+    </style>
+
     <h1>Home</h1>
     <form method="post">
       {% csrf_token %}
       {{ form.post }}
       <br>
-      <button type="submit" >Submit</button>
+      <button type="submit" class="btn btn-primary">SUBMIT</button>
     </form>
     <h2>{{ text }}</h2>
     {% for post in posts %}
@@ -19,14 +42,32 @@
   </div>
 
   <div class="col-md-4">
-    <h2>Members</h2>
-    {% for user in users %}
+    <style>
+
+
+    a{
+        border-style: solid SteelBlue;
+    }
+    </style>
+    <div class="panel panel-default">
+   <div class="panel-heading"> <span class="glyphicon glyphicon-user"></span> MEMBERS</div>
+     <div class="panel-body">
+  <p>
+
+  {% for user in users %}
+  <ul class="list-group">
       <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+
           <h3>{{ user.username }}</h3>
-      </a>
+  </ul>
     {% endfor %}
+
+  </p>
+    </div>
+    </div>
   </div>
 
+</div>
 </div>
 
 {% endblock %}

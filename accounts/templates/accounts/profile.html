@@ -8,7 +8,42 @@
 {% block body %}
 
 <div class="container">
+  <img src="http://www.anz.com/resources/5/1/51effbe1-70cb-4203-b8f2-c1555c306d46/1/profile.png" alt="dsa" width="120" >
+<style>
+h1{
+
+  color: MidnightBlue ;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+form {
+border-style: groove;
+border: 3px groove blue;
+padding-top: 30px;
+padding-left: 40px;
+padding-right: 40px;
+padding-bottom: 1px;
+width: 500px;
+
+position:absolute;
+left:530px;
+top: 150px;
+
+}
+
+img{
+position: absolute;
+left:320px;
+top:100px;
+}
+
+
+</style>
   <h1>Profile</h1>
+<form>
+
   <p>Username: <b>{{ user }}</b></p>
   <p>First_name: <b>{{ user.first_name }}</b></p>
   <p>Last_name: <b>{{ user.last_name }}</b></p>
@@ -34,7 +69,7 @@
   {% endif %}
   <p> </p>
 
-
+<f/form>
 </div>
 
 {% endblock %}
