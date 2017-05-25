@@ -105,6 +105,7 @@ class FlatsTestCase(TestCase):
 
 
     def test_view_list_flats(self):
+        self.client.login(username='user1', password='secret')
         response1 = self.client.get(reverse('flats:view_list_flats'))
         response2 = self.client.post(reverse('flats:view_list_flats'), {'Flats': FlatProfile.objects.get(name="flat2")})
 
@@ -115,6 +116,7 @@ class FlatsTestCase(TestCase):
 
 
     def test_view_flat(self):
+        self.client.login(username='user1', password='secret')
         response1 = self.client.get(reverse('flats:view_flat', args={2}))
         response2 = self.client.get(reverse('flats:view_flat', args={42}))
 

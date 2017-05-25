@@ -9,7 +9,8 @@
 {% block body %}
 <div class="container">
   <h1>Edit Flat</h1>
-  <form  method="post">
+
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ flat_form.as_p }}
     <button type="submit">Submit</button>

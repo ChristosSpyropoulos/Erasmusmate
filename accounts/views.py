@@ -76,8 +76,8 @@ def view_list_accounts(request):
 @transaction.atomic
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
         if form.is_valid() and profile_form.is_valid():
             form.save()
             profile_form.save()

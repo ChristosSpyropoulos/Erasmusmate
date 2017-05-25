@@ -75,7 +75,7 @@ def create_flat(request):
 @transaction.atomic
 def edit_flat(request):
     if request.method == 'POST':
-        flat_form = EditFlatForm(request.POST, instance=request.user.flatprofile)
+        flat_form = EditFlatForm(request.POST, request.FILES,instance=request.user.flatprofile)
         if flat_form.is_valid():
             flat_form.save()
             return redirect(reverse('flats:view_list_flats'))
