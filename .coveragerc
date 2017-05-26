@@ -4,6 +4,7 @@
 omit = 
     */migrations/*
     */templates/*
+    */python2.7.9/*
     Erasmusmates/settings.py
     
 
