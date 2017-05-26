@@ -1,0 +1,9 @@
+# .coveragerc to control coverage.py
+
+[report]
+omit = 
+    */migrations/*
+    */templates/*
+    Erasmusmates/settings.py
+    
+
