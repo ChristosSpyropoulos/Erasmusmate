@@ -112,35 +112,35 @@ h4{
 
   </style>
   <h1>Last flats registered</h1>
-  {% for flat in flats %}
+  <table>
+    {% for flat in flats %}
+    <tr>
+        <td>{{ flat.image }}</td>
+        <td><a href="{% url 'flats:view_flat' flat.id %}">
+        <h3>{{ flat.name }}</h3></a></td>
+        <td>{{ flat.description }}</td>
+    </tr>
+    {% empty %}
+      <p>No flat available.</p>
+    {% endfor %}
+  </table>
 
 
-    <h3>{{ flat.name }}</h3>
 
-    <p>{{ flat.description|truncatewords_html:80 }}</p>
-
-    <p><a href="{% url 'flats:view_flat' flat.id %}">Show more</a>
-
-  {% empty %}
-
-    <p>No flat available.</p>
-
-  {% endfor %}
-
-
-  <div>
       <h1>Last users registered</h1>
-      {% for user in users %}
-        <ul class="list-group">
-          <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+      <table>
+        {% for user in users %}
+        <tr>
+            <td>{{user.image}}</td>
+            <td><a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+            <h3>{{ user.user.username }}</h3></a></td>
+            <td>{{ user.description }}</td>
+        </tr>
+        {% empty %}
+          <p>No user available.</p>
+        {% endfor %}
+      </table>
 
-          <h3>{{ user.user.username }}</h3>
-        </ul>
-
-      {% empty %}
-        <p>No user available.</p>
-      {% endfor %}
-  </div>
 
 </div>
 
