@@ -8,6 +8,9 @@ from home.forms import HomeForm
 from home.models import Post
 from django.contrib.auth.models import User
 
+from accounts.models import UserProfile
+from flats.models import FlatProfile
+
 
 class HomeView(TemplateView):
     template_name = 'home/home.html'
@@ -33,3 +36,10 @@ class HomeView(TemplateView):
 
         args = {'form': form, 'text': text}
         return render(request, self.template_name, args)
+
+def view_home(request):
+    flats = FlatProfile.objects.all().order_by('-date')[:5]
+    users = UserProfile.objects.all().order_by('-date').exclude(id=request.user.id)[:5]
+
+    args = {'flats': flats, 'users': users}
+    return render(request, 'home/home_list.html', args)
