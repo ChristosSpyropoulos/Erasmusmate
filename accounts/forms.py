@@ -44,6 +44,7 @@ class EditProfileForm(forms.ModelForm):
 
         )
 class ProfileForm(forms.ModelForm):
+    #image = forms.ImageField()
     class Meta:
         model = UserProfile
         fields = (

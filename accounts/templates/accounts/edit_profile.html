@@ -42,7 +42,8 @@
 
   </style>
   <h1>Edit Profile</h1>
-  <form  method="post">
+  <form method="post" enctype="multipart/form-data">
+
     {% csrf_token %}
     {{ form.as_p }} <!--form as paragraph for username and password-->
     {{ profile_form.as_p }}

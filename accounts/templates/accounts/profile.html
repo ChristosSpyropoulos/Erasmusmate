@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+<!--{% load staticfiles %}-->
 
 {% block head %}
 <title>Profile</title>
@@ -67,9 +67,10 @@ top:100px;
   {% if user.userprofile.image %}
   <img src="{{ user.userprofile.image.url }}"  width = "150" height = "150"/>
   {% endif %}
-  <p> </p>
+  <br>
 
 <f/form>
+
 </div>
 
 {% endblock %}
