@@ -36,7 +36,18 @@
   <p>
     You have logged out!
   </p>
+  <p> You will be automatically redirected in few seconds </p>
+  <p> If you are not redirected, please follow this
+      <a href="{% url 'accounts:login' %}">link</a></p>
 
 
 </div>
+
+<script>
+    function redirect(){
+       window.location.href = "{% url 'accounts:login' %}";
+    }
+
+    setTimeout(redirect, 5000);
+</script>
 {% endblock %}
