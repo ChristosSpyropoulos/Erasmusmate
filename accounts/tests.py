@@ -13,7 +13,7 @@ from django.utils import timezone
 
 class UserProfileTestCase(TestCase):
     def setUp(self):
-        self.user2 = User.objects.create_user(username="admin", password="admin")
+        self.user2 = User.objects.create(username="testuser")
         self.userprofile = UserProfile.objects.create(
             user=self.user2,
             sex="male",
@@ -57,11 +57,11 @@ class UserProfileTestCase(TestCase):
 
 
     def test_str(self):
-        self.assertEqual(self.userprofile.__str__(), "Profile of admin")
+        self.assertEqual(self.userprofile.__str__(), "Profile of testuser")
 
 
 class UserTestCase(TestCase):
-    def get_page(self, url):
+    '''def get_page(self, url):
         """ Ensures given url returns HTTP 200. """
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -86,6 +86,66 @@ class UserTestCase(TestCase):
     def logout(self):
         self.client.logout()
 
-    """def test_view_profile(self):
-        self.login()
-        self.get_page(reverse('accounts:view_profile'))"""
+    def test_view_profile(self):
+        self.login
+        self.get_page(reverse('accounts:view_profile'))'''
+
+    def setUp(self):
+        self.user1 = User.objects.create_user(username="user1", password="secret")
+        self.user2 = User.objects.create(username="user2")
+        self.user3 = User.objects.create(username="user3")
+        self.user4 = User.objects.create(username="user4")
+        self.user5 = User.objects.create_user(username="user5", password="secret")
+
+
+        self.userprofile1 = UserProfile.objects.create(
+            user=self.user2,
+            sex="male",
+            university="AGH",
+            country_of_origin="Greece",
+            faculty="informatyka",
+            user_id = 101,
+            age=18,
+            email = "user@email.com",
+            prefered_cuisine = "CHINESE"
+        )
+
+    def test_view_profile(self):
+        self.client.login(username='user1', password='secret')
+        response1 = self.client.get(reverse('accounts:view_profile'))
+        self.assertEqual(response1.status_code, 200)
+
+
+
+    def test_edit_profile(self):
+        self.client.login(username='user1', password='secret')
+        data = { 'age': 18,
+                 'university': "AGH",
+                 'hardworking': "Don't care",
+                 'partying': "Don't care",
+                 'traveling': "Don't care",
+                 'smoking_permitted': "Don't care",
+                 'same_nationality_roommates': "Don't care",
+                 'men_or_women_on_room': "Don't care",
+                 'description': "nice user1",
+        }
+        response1 = self.client.get(reverse('accounts:edit_profile'))
+        self.assertEqual(response1.status_code, 200)
+        #response2 = self.client.post(reverse('accounts:edit_profile'), data)
+        #self.assertEqual(response2.status_code, 302)
+        #self.assertRedirects(response2, reverse('accounts:view_profile'))
+
+
+    def test_view_list_accounts(self):
+        self.client.login(username='user1', password='secret')
+        response1 = self.client.get(reverse('accounts:view_list_accounts'))
+        response2 = self.client.post(reverse('accounts:view_list_accounts'), {'users': UserProfile.objects.get(user=self.user2)})
+        self.assertEqual(response1.status_code, 200)
+        self.assertContains(response1, self.user2)
+
+        self.assertEqual(response2.status_code, 200)
+
+
+
+    #def test_change_password(self):
+    #def test_register(self):
