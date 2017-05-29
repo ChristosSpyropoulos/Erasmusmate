@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from accounts.models import Profile, UserProfile
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 
 from django.core.urlresolvers import reverse
 from django.utils import timezone
@@ -154,10 +155,77 @@ class UserTestCase(TestCase):
         response2 = self.client.post(reverse('accounts:view_list_accounts'), {'users': UserProfile.objects.get(user=self.user2)})
         self.assertEqual(response1.status_code, 200)
         self.assertContains(response1, self.user2)
-
         self.assertEqual(response2.status_code, 200)
 
 
 
-    #def test_change_password(self):
+    '''def test_change_password(self):
+        self.client.login(username='user1', password='secret')
+        data = { 'old_password': 'qweasdzxc',
+                 'new_password1': 'qweasdzxcv',
+                 'new_password2': 'qweasdzxcv',
+                 #'error_messages':'Please',
+        }
+        form = PasswordChangeForm(self.user1, data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form["old_password"].errors,
+                         [u'Your old password was entered incorrectly. Please enter it again.'])
+
+        response1 = self.client.get(reverse('accounts:change_password'))
+        response2 = self.client.post(reverse('accounts:change_password'), data)
+
+        self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 302)
+        #self.assertRedirects(response2, reverse('accounts:view_profile'))'''
+
+
+    def test_incorrect_password(self):
+        self.client.login(username='user1', password='secret')
+        #user = User.objects.get(username='testclient')
+        data = {
+            'old_password': 'test',
+            'new_password1': 'abc123',
+            'new_password2': 'abc123',
+            }
+        form = PasswordChangeForm(self.user1, data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form["old_password"].errors,
+                         [u'Your old password was entered incorrectly. Please enter it again.'])
+
+
+    def test_password_verification(self):
+        # The two new passwords do not match.
+        self.client.login(username='user1', password='secret')
+        #user = User.objects.get(username='testclient')
+        data = {
+            'old_password': 'password',
+            'new_password1': 'abc123',
+            'new_password2': 'abc',
+            }
+        form = PasswordChangeForm(self.user1, data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form["new_password2"].errors,
+                         [u"The two password fields didn't match."])
+
+
+    '''def test_success(self):
+        # The success case.
+        self.client.login(username='user1', password='secret')
+        #user = User.objects.get(username='testclient')
+        data = {
+            'old_password': 'password',
+            'new_password1': 'abc123',
+            'new_password2': 'abc123',
+            }
+        form = PasswordChangeForm(self.user1, data)
+        self.assertTrue(form.is_valid())'''
+
+    def test_field_order(self):
+        # Regression test - check the order of fields:
+        self.client.login(username='user1', password='secret')
+        #user = User.objects.get(username='testclient')
+        self.assertEqual(PasswordChangeForm(self.user1, {}).fields.keys(),
+                         ['old_password', 'new_password1', 'new_password2'])
+
+
     #def test_register(self):
