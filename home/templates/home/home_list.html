@@ -128,7 +128,7 @@ tr:hover {background-color: #ffffff}
   <table>
     {% for flat in flats %}
     <tr>
-        <td>{{ flat.image }}</td>
+        <td><img src="{{ flat.image.url }}"  width = "200" height = "200"/></td>
         <td><a href="{% url 'flats:view_flat' flat.id %}">
         <h3>{{ flat.name }}</h3></a></td>
         <td>{{ flat.description }}</td>
@@ -144,7 +144,7 @@ tr:hover {background-color: #ffffff}
       <table>
         {% for user in users %}
         <tr>
-            <td>{{user.image}}</td>
+            <td><img src="{{ user.image.url }}"  width = "200" height = "200"/></td>
             <td><a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
             <h3>{{ user.user.username }}</h3></a></td>
             <td>{{ user.description }}</td>
