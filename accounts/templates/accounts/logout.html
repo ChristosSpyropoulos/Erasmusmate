@@ -2,21 +2,19 @@
 
 {% block head %}
 <title>Logout</title>  <!--tab name-->
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/style.css' %}">
 {% endblock %}
 
 {% block body %}
 <div class="container">
-  <body>
-      <img id="image1" src="http://findicons.com/files/icons/1786/oxygen_refit/128/gnome_panel_force_quit.png" alt="image22" style="width:100px">
-
-    </body>
-  
-  <h1>Logged out</h1>
-  <p>
-    You have logged out!
-  </p>
-  <p> You will be automatically redirected in few seconds </p>
-  <p> If you are not redirected, please follow this
+    <h1>Logged out</h1>
+    <img class="middle" src="http://findicons.com/files/icons/1786/oxygen_refit/128/gnome_panel_force_quit.png" alt="image22" style="width:100px">
+    <h3 align="center">
+    You are logged out!
+    </h3>
+  <p align="center"> You will be automatically redirected in few seconds </p>
+  <p align="center"> If you are not redirected, please follow this
       <a href="{% url 'accounts:login' %}">link</a></p>
 
 

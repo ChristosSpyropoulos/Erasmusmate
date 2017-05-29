@@ -3,13 +3,15 @@
 
 {% block head %}
 <title>Edit Profile</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/style.css' %}">
 {% endblock %}
 
 
 {% block body %}
 <div class="container">
     <img src="http://www.freeiconspng.com/uploads/profile-picture-icon-png-man-profile-user-icon-11.png" alt="dsa" width="160" >
- 
+
   <h1>Edit Profile</h1>
   <form method="post" enctype="multipart/form-data">
 

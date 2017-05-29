@@ -3,21 +3,22 @@
 
 {% block head %}
 <title>Find A Flat</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/style.css' %}">
 {% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <img id="image1" src="http://blog.hostonnet.com/wp-content/uploads/2014/08/serch.png" alt="image2" style="width:240px height:120px">
+    <img id="image1" src="http://blog.hostonnet.com/wp-content/uploads/2014/08/serch.png" alt="image1">
 
     <h1>Flats available</h1>
-    <h4>Flats</h4>
-    <form id="form" method="get" action="">
+    <form id="search" method="get" action="">
         <input type="text" name="q"  placeholder="Search" value="{{ request.GET.q }}"/>
         <input type="submit" value="Search"/>
     </form>
     {% for flat in Flats %}
-      <form id="form2" method="get" action="">
+      <form id="flatform" method="get" action="">
 
         <h3>{{ flat.name }}</h3>
         <p>{{ flat.description|truncatewords_html:80 }}</p>
@@ -34,7 +35,7 @@
 
         <span class="step-links">
             {% if Flats.has_previous %}
-                <a id=id="aa" href="{% add_params request.get_full_path page=Flats.previous_page_number %}">previous</a>
+                <a href="{% add_params request.get_full_path page=Flats.previous_page_number %}">previous</a>
             {% endif %}
 
             <span class="current">
@@ -42,7 +43,7 @@
             </span>
 
             {% if Flats.has_next %}
-                <aid=id="a2a" href="{% add_params request.get_full_path page=Flats.next_page_number %}">next</a>
+                <a href="{% add_params request.get_full_path page=Flats.next_page_number %}">next</a>
             {% endif %}
         </span>
     </div>

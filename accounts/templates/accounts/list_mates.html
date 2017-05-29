@@ -3,26 +3,27 @@
 
 {% block head %}
 <title>Find A Mate</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/style.css' %}">
 {% endblock %}
 
 {% block body %}
 
 <div class="container">
-  <body>
+
       <img id="image1" src="http://www.nedmartin.org/v3/_img/flatmates-logo.png" alt="image2" style="width:240px height:120px">
 
-  </body>
+
 
     <h1>Erasmus mates</h1>
-    <form  id="form" method="get" action="">
+    <form  id="search" method="get" action="">
         <input type="text" name="q" placeholder="Search" value="{{ request.GET.q }}"/>
         <input type="submit" value="Search"/>
     </form>
     {% for user in users %}
       <form  id="form2" method="get" action="">
         <h3>{{ user }}</h3>
-        <p>{{ user.first_name }}</p>
-        <p>{{ user.last_name }}</p>
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
         <p><a href="{% url 'accounts:view_profile_with_pk' user.id %}">Show profile</a>
         {% empty %}
         <p>No user available.</p>

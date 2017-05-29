@@ -2,6 +2,8 @@
 
 {% block head %}
 <title>Login</title>  <!--tab name-->
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/style.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -11,14 +13,14 @@
 
     </body>
 
-  <h1>Welcome</h1>
+  <h1>Welcome on Erasmusmates</h1>
+  <h2>BEST WAY TO FIND FLAT AND FLATMATE <span class="glyphicon glyphicon-home" aria-hidden="true"></span></h2>
+  <br>
+  <h3 align="center">Login to access to other Erasmus profiles and available flats</h3>
 
-  <h2>Login</h2>
-<h3>BEST WAY TO FIND FLAT AND FLATMATE <span class="glyphicon glyphicon-home" aria-hidden="true"></span></h3>
-
-
-  <form method="post">
-      <img id="image2" src="http://www.freeiconspng.com/uploads/user-login-icon-29.png" alt="image2" style="width:120px" position="absolute" left="30px">
+  <img class="middle" src="http://www.freeiconspng.com/uploads/user-login-icon-29.png" alt="image2" style="width:120px" position="absolute" left="30px">
+  <h3>Login</h3>
+  <form class="login" method="post">
     <!--cross site request forgery = csrf-->
     {% csrf_token %}
     {{ form.as_p }} <!--form as paragraph for username and password-->
