@@ -144,7 +144,7 @@ STATIC_ROOT = 'staticfiles'
 LOGIN_REDIRECT_URL = '/home/'   #this was /account/ ,i changed it because after login it redirect me to nothing
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Erasmusmates/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
 
 LOGIN_URL = '/account/login'
 
