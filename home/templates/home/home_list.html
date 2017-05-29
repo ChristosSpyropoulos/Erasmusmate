@@ -9,102 +9,7 @@
 
 <div class="container">
 
-  <style>
-  #image1{
-
-       width: 180px;
-       position: absolute;
-       right: 900px;
-       top: 100px;
-
-  }
-
-
-  h1 {
-
-     color: MidnightBlue ;
-    text-align: center;
-     text-transform: uppercase;
-       font-size: 30px;
-  }
-
-
-
-  #form {
-    border-style: solid SteelBlue;
-   position: relative;
-   top: 70px;
-    border: 3px solid SteelBlue ;
-   width: 30%;
-    height:100px;
-   margin: 10px 300px 150px 400px;
-   box-sizing: border-box;
-   padding-top: 15px;
-   padding-right: 300px;
-  padding-bottom: 30px;
-   padding-left: 80px;
-   border-radius: 4px;
-
-  }
-
-  image{
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 150px;
-    position: absolute;
-    left: 250px;
-    top: 160px;
-  }
-
-  #form2 {
-    border-style: solid SteelBlue;
-   position: absolute;
-   top: 220px;
-   right: 350px;
-    border: 0px solid SteelBlue ;
-   width: 40%;
-    height:300px;
-   margin: 10px 300px 150px 400px;
-   box-sizing: border-box;
-   padding-top: 5px;
-   padding-right: 300px;
-  padding-bottom: 20px;
-   padding-left: 80px;
-   border-radius: 4px;
-
-  }
-
-  button{
-  font-size: 20px;
-  color: DarkRed ;
-  }
-
-  form {
-    border-style: solid SteelBlue;
-   position: relative;
-   top: 70px;
-    border: 3px solid SteelBlue ;
-   width: 30%;
-    height:100px;
-   margin: 10px 300px 150px 400px;
-   box-sizing: border-box;
-   padding-top: 15px;
-   padding-right: 300px;
-  padding-bottom: 30px;
-   padding-left: 80px;
-   border-radius: 4px;
-
-  }
-
-h4{
-  color: MidnightBlue ;
-  position: absolute;
-  top: 180px;
-  right: 1100px;
-  text-transform: uppercase;
-    font-size: 26px;
-}
+<style>
 
 table, tr {
    border: 2px solid SteelBlue;
@@ -122,13 +27,17 @@ td {
 
 tr:hover {background-color: #ffffff}
 
+</style>
 
-  </style>
   <h1>Last flats registered</h1>
   <table>
     {% for flat in flats %}
     <tr>
-        <td><img src="{{ flat.image.url }}"  width = "200" height = "200"/></td>
+        <td>
+        {% if flat.image %}
+            <img src="{{ flat.image.url }}"  width = "200" height = "200"/>
+        {% endif %}
+        </td>
         <td><a href="{% url 'flats:view_flat' flat.id %}">
         <h3>{{ flat.name }}</h3></a></td>
         <td>{{ flat.description }}</td>
@@ -144,7 +53,11 @@ tr:hover {background-color: #ffffff}
       <table>
         {% for user in users %}
         <tr>
-            <td><img src="{{ user.image.url }}"  width = "200" height = "200"/></td>
+            <td>
+                {% if user.image %}
+                    <img src="{{ user.image.url }}"  width = "200" height = "200"/>
+                {% endif %}
+            </td>
             <td><a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
             <h3>{{ user.user.username }}</h3></a></td>
             <td>{{ user.description }}</td>

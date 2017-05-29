@@ -5,7 +5,4 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.view_home, name='home')
-    #url(r'^$', HomeView.as_view(),name='home'),   #as_view method is inherited by superclass of TemplateView(called View)
-    #url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', HomeView.change_friends,name='change_friends'),
-
 ]
