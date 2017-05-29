@@ -159,7 +159,7 @@ class UserTestCase(TestCase):
 
 
 
-    '''def test_change_password(self):
+    def test_change_password(self):
         self.client.login(username='user1', password='secret')
         data = { 'old_password': 'qweasdzxc',
                  'new_password1': 'qweasdzxcv',
@@ -176,7 +176,7 @@ class UserTestCase(TestCase):
 
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
-        #self.assertRedirects(response2, reverse('accounts:view_profile'))'''
+        #self.assertRedirects(response2, reverse('accounts:view_profile'))
 
 
     def test_incorrect_password(self):
