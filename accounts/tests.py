@@ -85,10 +85,7 @@ class UserTestCase(TestCase):
 
     def logout(self):
         self.client.logout()
-
-    def test_view_profile(self):
-        self.login
-        self.get_page(reverse('accounts:view_profile'))'''
+'''
 
     def setUp(self):
         self.user1 = User.objects.create_user(username="user1", password="secret")
@@ -113,14 +110,26 @@ class UserTestCase(TestCase):
     def test_view_profile(self):
         self.client.login(username='user1', password='secret')
         response1 = self.client.get(reverse('accounts:view_profile'))
+        response2 = self.client.get(reverse('flats:view_flat', args={404}))
+
         self.assertEqual(response1.status_code, 200)
+        self.assertEqual(response2.status_code, 404)
 
 
 
     def test_edit_profile(self):
         self.client.login(username='user1', password='secret')
         data = { 'age': 18,
+                 'sex':"MALE",
+                 'email':'geo@email.com',
+                 'phone':697632343,
+                 'country_of_origin':'Greece',
+                 'country_of_studies':'Poland',
+                 'city_of_studies':'Krakow',
+                 'region':'center',
                  'university': "AGH",
+                 'faculty':'informatyka',
+                 'prefered_cuisine':"CHINESE",
                  'hardworking': "Don't care",
                  'partying': "Don't care",
                  'traveling': "Don't care",
@@ -128,12 +137,15 @@ class UserTestCase(TestCase):
                  'same_nationality_roommates': "Don't care",
                  'men_or_women_on_room': "Don't care",
                  'description': "nice user1",
+                 'num_of_roommates':"Don't care",
+                 'time_of_staying_in_flat':'UNKNOWN',
+                 'price':200,
         }
         response1 = self.client.get(reverse('accounts:edit_profile'))
         self.assertEqual(response1.status_code, 200)
-        #response2 = self.client.post(reverse('accounts:edit_profile'), data)
-        #self.assertEqual(response2.status_code, 302)
-        #self.assertRedirects(response2, reverse('accounts:view_profile'))
+        response2 = self.client.post(reverse('accounts:edit_profile'), data)
+        self.assertEqual(response2.status_code, 302)
+        self.assertRedirects(response2, reverse('accounts:view_profile'))
 
 
     def test_view_list_accounts(self):
