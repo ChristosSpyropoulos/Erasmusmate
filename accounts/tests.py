@@ -63,31 +63,6 @@ class UserProfileTestCase(TestCase):
 
 
 class UserTestCase(TestCase):
-    '''def get_page(self, url):
-        """ Ensures given url returns HTTP 200. """
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        return response
-
-    def page_redirect(self, url):
-        """ Ensure given url returns HTTP 302 """
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 302)
-        return response
-
-    def page_404(self, url):
-        """ Ensure given url returns HTTP 404 """
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 404)
-        return response
-
-    def login(self):
-        login = self.client.login(username='admin', password='admin')
-        self.assertEqual(login, True)
-
-    def logout(self):
-        self.client.logout()
-'''
 
     def setUp(self):
         self.user1 = User.objects.create_user(username="user1", password="secret")
@@ -95,7 +70,6 @@ class UserTestCase(TestCase):
         self.user3 = User.objects.create(username="user3")
         self.user4 = User.objects.create(username="user4")
         self.user5 = User.objects.create_user(username="user5", password="secret")
-
 
         self.userprofile1 = UserProfile.objects.create(
             user=self.user2,
@@ -111,8 +85,8 @@ class UserTestCase(TestCase):
 
     def test_view_profile(self):
         self.client.login(username='user1', password='secret')
-        response1 = self.client.get(reverse('accounts:view_profile'))
-        response2 = self.client.get(reverse('flats:view_flat', args={404}))
+        response1 = self.client.get(reverse('accounts:view_profile_with_pk', args={'2'}))
+        response2 = self.client.get(reverse('accounts:view_profile_with_pk', args={'400'}))
 
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 404)
