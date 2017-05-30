@@ -1,10 +1,9 @@
 # .coveragerc to control coverage.py
 
 [report]
-omit = 
+omit =
     */migrations/*
     */templates/*
     */python2.7.9/*
     Erasmusmates/settings.py
-    
-
+    manage.py
