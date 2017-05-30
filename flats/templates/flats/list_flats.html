@@ -15,7 +15,7 @@
     <h1>Flats available</h1>
     <form id="search" method="get" action="">
         <input type="text" name="q"  placeholder="Search" value="{{ request.GET.q }}"/>
-        <input type="submit" value="Search"/>
+        <input type="submit" class="btn btn-primary" value="Search"/>
     </form>
     {% for flat in Flats %}
       <form id="flatform" method="get" action="">
