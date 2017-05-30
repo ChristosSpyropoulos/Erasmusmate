@@ -20,9 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
-    url(r'^home/', include('home.urls', namespace='home')),
+    url(r'^', include('home.urls', namespace='home')),
     url(r'^account/', include('accounts.urls', namespace='accounts')),
     url(r'^flats/', include('flats.urls', namespace='flats')),
 
