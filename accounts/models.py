@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 class Profile(models.Model):
     CHOICES = (
@@ -37,26 +38,26 @@ class Profile(models.Model):
         ("Women only", "Women only")
     )
     RATE_CHOICES = (
-        ("Absolutely","Absolutely"),
-        ("A bit", "A bit"),
         ("Don't care", "Don't care"),
+        ("Absolutely", "Absolutely"),
+        ("A bit", "A bit"),
         ("Not really", "Not really"),
         ("Absolutely not", "Absolutely not")
     )
 
     user = models.OneToOneField(User)
 
-    #additionnal content
+    # additionnal content
     description = models.CharField(max_length=200,blank=True)
     image = models.ImageField(upload_to='profile_image', blank=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-    #criteria
+    # criteria
     hardworking = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
     partying = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
     traveling = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
 
-    #restrictions
+    # restrictions
     price = models.PositiveIntegerField(default=0)
     smoking_permitted = models.CharField(max_length=10, default=CHOICES[0][0], choices=CHOICES)
     same_nationality_roommates = models.CharField(max_length=10, default=CHOICES[0][0], choices=CHOICES)
@@ -67,10 +68,11 @@ class Profile(models.Model):
     class Meta:
             abstract = True
 
+
 class UserProfile(Profile):
     CUISINE_CHOICES = (
-        ('GR' , 'GREEK' ),
-        ('FR' , 'FRENCH'),
+        ('GR', 'GREEK' ),
+        ('FR', 'FRENCH'),
         ('CHINESE', 'CHINESE'),
         ('INTERNATIONAL', 'INTERNATIONAL')
     )
@@ -79,14 +81,14 @@ class UserProfile(Profile):
         ('FEMALE', "FEMALE")
     )
 
-    #user additionnal content
+    # user additionnal content
     age = models.PositiveIntegerField(default=0,blank=True)
-    sex = models.CharField(max_length=10, default='',choices = GENDER_CHOICES)
+    sex = models.CharField(max_length=10, default='', choices=GENDER_CHOICES)
     email = models.EmailField(max_length=50,blank=False)
     phone = models.IntegerField(default=0,blank=True)
-    country_of_origin = models.CharField(max_length=20, default='',blank=True)
-    country_of_studies = models.CharField(max_length=20, default='',blank=True)
-    city_of_studies = models.CharField(max_length=20, default='',blank=True)
+    country_of_origin = models.CharField(max_length=20, default='', blank=True)
+    country_of_studies = models.CharField(max_length=20, default='', blank=True)
+    city_of_studies = models.CharField(max_length=20, default='', blank=True)
     region = models.CharField(max_length=20, default='',blank=True)
     university = models.CharField(max_length=20,default='',blank=True)
     faculty = models.CharField(max_length=30,default='',blank=True)
@@ -95,8 +97,9 @@ class UserProfile(Profile):
     def __str__(self):
         return "Profile of {0}".format(self.user.username)
 
+
 def create_profile(sender, **kwargs):
-    if kwargs['created']:   #if the user has been crated
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])   #then i am gonna create a user profile
+    if kwargs['created']:   # if the user has been crated
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])   # then i am gonna create a user profile
 
 post_save.connect(create_profile, sender=User)
