@@ -136,18 +136,33 @@ class UserTestCase(TestCase):
 
     def test_change_password(self):
         self.client.login(username='user1', password='secret')
-        data = { 'old_password': 'qweasdzxc',
+        data1 = { 'old_password': 'sdsdkld',
+                 'new_password1': 'qweasdzxcv',
+                 'new_password2': 'qweasdzxcv',
+                 #'error_messages':'Please',
+        }
+        data2 = { 'old_password': 'secret',
+                 'new_password1': 'qweasdzxcv',
+                 'new_password2': 'qsdsdskscv',
+                 #'error_messages':'Please',
+        }
+        data3 = { 'old_password': 'secret',
                  'new_password1': 'qweasdzxcv',
                  'new_password2': 'qweasdzxcv',
                  #'error_messages':'Please',
         }
         response1 = self.client.get(reverse('accounts:change_password'))
-        response2 = self.client.post(reverse('accounts:change_password'), data)
+        response2 = self.client.post(reverse('accounts:change_password'), data1)
+        response3 = self.client.post(reverse('accounts:change_password'), data2)
+        response4 = self.client.post(reverse('accounts:change_password'), data3)
 
         self.assertEqual(response1.status_code, 200)
         self.assertEqual(response2.status_code, 302)
-
-        #self.assertRedirects(response2, reverse('accounts:view_profile'))
+        self.assertRedirects(response2, reverse('accounts:change_password'))
+        self.assertEqual(response3.status_code, 302)
+        self.assertRedirects(response3, reverse('accounts:change_password'))
+        self.assertEqual(response4.status_code, 302)
+        self.assertRedirects(response4, reverse('accounts:view_profile'))
 
 
     def test_incorrect_password(self):

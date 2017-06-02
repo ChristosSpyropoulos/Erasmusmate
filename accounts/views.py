@@ -106,10 +106,10 @@ def view_list_accounts(request):
     c_smoking_permitted = choices_list
     c_same_nationality_roommates = choices_list
     c_time_of_staying_in_flat = time_choices_list
-    c_men_or_women_on_room = men_or_women_list
+    #c_men_or_women_on_room = men_or_women_list
     c_num_of_roommates = num_of_people_list
     c_sex = sex_choices_list
-    c_prefered_cuisine = prefered_cuisine_list
+    #c_prefered_cuisine = prefered_cuisine_list
 
     # ---end append choices to list---
     # ---create queries---
@@ -117,24 +117,24 @@ def view_list_accounts(request):
     q_hardworking = request.GET.get("q_hardworking")
     q_partying = request.GET.get("q_partying")
     q_traveling = request.GET.get("q_traveling")
-    q_price_from = request.GET.get("q_price_from")
-    q_price_to = request.GET.get("q_price_to")
+    #q_price_from = request.GET.get("q_price_from")
+    #q_price_to = request.GET.get("q_price_to")
     q_smoking_permitted = request.GET.get("q_smoking_permitted")
     q_same_nationality_roommates = request.GET.get("q_same_nationality_roommates")
     q_time_of_staying_in_flat = request.GET.get("q_time_of_staying_in_flat")
-    q_men_or_women_on_room = request.GET.get("q_men_or_women_on_room")
+    #q_men_or_women_on_room = request.GET.get("q_men_or_women_on_room")
     q_num_of_roommates = request.GET.get("q_num_of_roommates")
-    q_age_from = request.GET.get("q_age_from")
-    q_age_to = request.GET.get("q_age_to")
+    #q_age_from = request.GET.get("q_age_from")
+    #q_age_to = request.GET.get("q_age_to")
     q_sex = request.GET.get("q_sex")
-    q_email = request.GET.get("q_email")
+    #q_email = request.GET.get("q_email")
     q_country_of_origin = request.GET.get("q_country_of_origin")
     q_country_of_studies = request.GET.get("q_country_of_studies")
     q_city_of_studies = request.GET.get("q_city_of_studies")
-    q_region = request.GET.get("q_region")
+    #q_region = request.GET.get("q_region")
     q_university = request.GET.get("q_university")
     q_faculty = request.GET.get("q_faculty")
-    q_prefered_cuisine = request.GET.get("q_prefered_cuisine")
+    #q_prefered_cuisine = request.GET.get("q_prefered_cuisine")
     # ---end queries---
     if q_search:
         queryset_list = User.objects.filter(
@@ -159,10 +159,10 @@ def view_list_accounts(request):
         queryset_list = queryset_list.filter(Q(userprofile__partying__icontains=q_partying))
     if q_traveling:
         queryset_list = queryset_list.filter(Q(userprofile__traveling__icontains=q_traveling))
-    if q_price_from:
-        queryset_list = queryset_list.filter(Q(userprofile__price__gte=q_price_from))
-    if q_price_to:
-        queryset_list = queryset_list.filter(Q(userprofile__price__lte=q_price_to))
+    #if q_price_from:
+    #    queryset_list = queryset_list.filter(Q(userprofile__price__gte=q_price_from))
+    #if q_price_to:
+    #    queryset_list = queryset_list.filter(Q(userprofile__price__lte=q_price_to))
     if q_smoking_permitted:
         queryset_list = queryset_list.filter(Q(userprofile__smoking_permitted__icontains=q_smoking_permitted))
     if q_same_nationality_roommates:
@@ -171,28 +171,28 @@ def view_list_accounts(request):
     if q_time_of_staying_in_flat:
         queryset_list = queryset_list.filter(
             Q(userprofile__time_of_staying_in_flat__icontains=q_time_of_staying_in_flat))
-    if q_men_or_women_on_room:
-        queryset_list = queryset_list.filter(Q(userprofile__men_or_women_on_room__icontains=q_men_or_women_on_room))
+    #if q_men_or_women_on_room:
+    #    queryset_list = queryset_list.filter(Q(userprofile__men_or_women_on_room__icontains=q_men_or_women_on_room))
     if q_num_of_roommates:
         queryset_list = queryset_list.filter(Q(userprofile__num_of_roommates__icontains=q_num_of_roommates))
-    if q_age_from:
-        queryset_list = queryset_list.filter(Q(userprofile__age__gte=q_age_from))
-    if q_age_to:
-        queryset_list = queryset_list.filter(Q(userprofile__age__lte=q_age_to))
+    #if q_age_from:
+    #    queryset_list = queryset_list.filter(Q(userprofile__age__gte=q_age_from))
+    #if q_age_to:
+    #    queryset_list = queryset_list.filter(Q(userprofile__age__lte=q_age_to))
     if q_sex:
         queryset_list = queryset_list.filter(Q(userprofile__sex__icontains=q_sex))
-    if q_email:
-        queryset_list = queryset_list.filter(Q(email__icontains=q_email))
-    if q_prefered_cuisine:
-        queryset_list = queryset_list.filter(Q(userprofile__prefered_cuisine__icontains=q_prefered_cuisine))
+    #if q_email:
+    #    queryset_list = queryset_list.filter(Q(email__icontains=q_email))
+    #if q_prefered_cuisine:
+    #    queryset_list = queryset_list.filter(Q(userprofile__prefered_cuisine__icontains=q_prefered_cuisine))
     if q_country_of_origin:
         queryset_list = queryset_list.filter(Q(userprofile__country_of_origin__icontains=q_country_of_origin))
     if q_country_of_studies:
         queryset_list = queryset_list.filter(Q(userprofile__country_of_studies__icontains=q_country_of_studies))
     if q_city_of_studies:
         queryset_list = queryset_list.filter(Q(userprofile__city_of_studies__icontains=q_city_of_studies))
-    if q_region:
-        queryset_list = queryset_list.filter(Q(userprofile__region__icontains=q_region))
+    #if q_region:
+    #    queryset_list = queryset_list.filter(Q(userprofile__region__icontains=q_region))
     if q_university:
         queryset_list = queryset_list.filter(Q(userprofile__university__icontains=q_university))
     if q_faculty:
@@ -217,10 +217,10 @@ def view_list_accounts(request):
         'smoking_permitted': c_smoking_permitted,
         'same_nationality_roommates': c_same_nationality_roommates,
         'time_of_staying_in_flat': c_time_of_staying_in_flat,
-        'men_or_women_on_room': c_men_or_women_on_room,
+        #'men_or_women_on_room': c_men_or_women_on_room,
         'num_of_roommates': c_num_of_roommates,
         'sex': c_sex,
-        'prefered_cuisine': c_prefered_cuisine
+        #'prefered_cuisine': c_prefered_cuisine
     }
     return render(request, 'accounts/list_mates.html', args)
 
