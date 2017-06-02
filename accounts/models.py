@@ -53,9 +53,9 @@ class Profile(models.Model):
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     # criteria
-    hardworking = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
-    partying = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
-    traveling = models.CharField(max_length=20, default=RATE_CHOICES[2][0], choices=RATE_CHOICES)
+    hardworking = models.CharField(max_length=20, default=RATE_CHOICES[0][0], choices=RATE_CHOICES)
+    partying = models.CharField(max_length=20, default=RATE_CHOICES[0][0], choices=RATE_CHOICES)
+    traveling = models.CharField(max_length=20, default=RATE_CHOICES[0][0], choices=RATE_CHOICES)
 
     # restrictions
     price = models.PositiveIntegerField(default=0)

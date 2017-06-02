@@ -198,7 +198,7 @@ def view_list_accounts(request):
     if q_faculty:
         queryset_list = queryset_list.filter(Q(userprofile__faculty__icontains=q_faculty))
 
-    paginator = Paginator(queryset_list, 3)
+    paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
     try:
         queryset_list = paginator.page(page)

@@ -72,7 +72,7 @@ def view_list_flats(request):
     if q_couples_accepted:
         queryset_list = queryset_list.filter(Q(couples_accepted__icontains=q_couples_accepted))
 
-    paginator = Paginator(queryset_list, 3)
+    paginator = Paginator(queryset_list, 5)
     page = request.GET.get('page')
     try:
         queryset_list = paginator.page(page)

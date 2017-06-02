@@ -14,12 +14,16 @@
       <img id="image1" src="http://www.nedmartin.org/v3/_img/flatmates-logo.png" alt="image2" style="width:240px; height:120px">
 
     <h1>Erasmus mates</h1>
-
+    <br/><br/>
+    <br/><br/>
+    <div class="col-md-5">
     {# search filters #}
     <form  id="search" method="get" action="">
+        <input type="text" name="q_search" placeholder="Search" value="{{ request.GET.q }}"/>
+        <input type="submit" class="btn btn-primary" value="Search"/>
         <ul>
             <li>
-                <label>hardworking
+                <label>Hard-worker
                     <select name="q_hardworking">
                     {% for choice in hardworking %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -28,7 +32,7 @@
                 </label>
             </li>
             <li>
-                <label>partying
+                <label>Party-lover
                     <select name="q_partying">
                     {% for choice in partying %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -37,7 +41,7 @@
                 </label>
             </li>
             <li>
-                <label>traveling
+                <label>Traveler
                     <select name="q_traveling">
                     {% for choice in traveling %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -46,17 +50,7 @@
                 </label>
             </li>
             <li>
-                <label>price from:
-                    <input type="number" name="q_price_from" min="0" max="1000000000">
-                </label>
-            </li>
-            <li>
-                <label>price to:
-                    <input type="number" name="q_price_to" min="0" max="1000000000">
-                </label>
-            </li>
-            <li>
-                <label>smoking permitted
+                <label>Smoker
                     <select name="q_smoking_permitted">
                     {% for choice in smoking_permitted %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -65,7 +59,7 @@
                 </label>
             </li>
             <li>
-                <label>same nationality roommates
+                <label>Look for same nationality
                     <select name="q_same_nationality_roommates">
                     {% for choice in same_nationality_roommates %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -74,7 +68,7 @@
                 </label>
             </li>
             <li>
-                <label>time of staying in flat
+                <label>Time of stay
                     <select name="q_time_of_staying_in_flat">
                     {% for choice in time_of_staying_in_flat %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -83,16 +77,7 @@
                 </label>
             </li>
             <li>
-                <label>men or women on room
-                    <select name="q_men_or_women_on_room">
-                    {% for choice in men_or_women_on_room %}
-                        <option value={{ choice }}> {{ choice }} </option>
-                    {% endfor %}
-                    </select>
-                </label>
-            </li>
-            <li>
-                <label>num of roommates
+                <label>Max number of roomates
                     <select name="q_num_of_roommates">
                     {% for choice in num_of_roommates %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -101,17 +86,7 @@
                 </label>
             </li>
             <li>
-                <label>age from:
-                    <input type="number" name="q_age_from" min="1" max="130">
-                </label>
-            </li>
-            <li>
-                <label>age to:
-                    <input type="number" name="q_age_to" min="1" max="130">
-                </label>
-            </li>
-            <li>
-                <label>sex
+                <label>Sex
                     <select name="q_sex">
                     {% for choice in sex %}
                         <option value={{ choice }}> {{ choice }} </option>
@@ -120,53 +95,34 @@
                 </label>
             </li>
             <li>
-                <label>email
-                <input type="text" name="q_email" placeholder="email" value="{{ request.GET.q_email }}"/>
-                </label>
-            </li>
-            <li>
-                <label>country of origin
+                <label>Country of origin
                 <input type="text" name="q_country_of_origin" placeholder="country_of_origin" value="{{ request.GET.q_country_of_origin }}"/>
                 </label>
             </li>
             <li>
-                <label>country of studies
+                <label>Country of studies
                 <input type="text" name="q_country_of_studies" placeholder="country_of_studies" value="{{ request.GET.q_country_of_studies }}"/>
                 </label>
             </li>
             <li>
-                <label>city of studies
+                <label>City of studies
                 <input type="text" name="q_city_of_studies" placeholder="city_of_studies" value="{{ request.GET.q_city_of_studies }}"/>
                 </label>
             </li>
             <li>
-                <label>region
-                <input type="text" name="q_region" placeholder="region" value="{{ request.GET.q_region }}"/>
-                </label>
-            </li>
-            <li>
-                <label>university
+                <label>University
                 <input type="text" name="q_university" placeholder="university" value="{{ request.GET.q_university }}"/>
                 </label>
             </li>
             <li>
-                <label>faculty
+                <label>Faculty
                 <input type="text" name="q_faculty" placeholder="faculty" value="{{ request.GET.q_faculty }}"/>
                 </label>
             </li>
-            <li>
-                <label>prefered cuisine
-                    <select name="q_prefered_cuisine">
-                    {% for choice in prefered_cuisine %}
-                        <option value={{ choice }}> {{ choice }} </option>
-                    {% endfor %}
-                    </select>
-                </label>
-            </li>
         </ul>
-        <input type="text" name="q_search" placeholder="Search" value="{{ request.GET.q }}"/>
-        <input type="submit" class="btn btn-primary" value="Search"/>
     </form>
+</div>
+<div class="col-md-7">
     {% for user in users %}
       <form  id="form2" method="get" action="">
         <h3>{{ user }}</h3>
@@ -191,6 +147,7 @@
             {% endif %}
         </span>
     </div>
+</div>
 </div>
 
 {% endblock %}

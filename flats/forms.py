@@ -9,7 +9,27 @@ class EditFlatForm(forms.ModelForm):
     class Meta:
         model = FlatProfile
         #specify the fields i want to show on edit profile page
-        exclude = ('user','date')
+        fields = (
+            'name',
+            'description',
+            'place',
+            'adress',
+
+            'hardworking',
+            'partying',
+            'traveling',
+
+            'price',
+            'time_of_staying_in_flat',
+            'smoking_permitted',
+            'men_or_women_on_room',
+            'same_nationality_roommates',
+            'num_of_roommates',
+            'num_of_room_available',
+            'couples_accepted',
+
+            'image',
+        )
 
 
 
@@ -17,4 +37,24 @@ class CreateFlatForm(forms.ModelForm):
     # it specifies the metadata for the form itself
     class Meta:
         model = FlatProfile
-        exclude = ('user','date')
+        fields = (
+            'name',
+            'description',
+            'place',
+            'adress',
+
+            'hardworking',
+            'partying',
+            'traveling',
+
+            'price',
+            'time_of_staying_in_flat',
+            'smoking_permitted',
+            'men_or_women_on_room',
+            'same_nationality_roommates',
+            'num_of_roommates',
+            'num_of_room_available',
+            'couples_accepted',
+
+            'image',
+        )
