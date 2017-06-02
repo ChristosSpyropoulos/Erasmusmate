@@ -39,6 +39,10 @@ class HomeTestCase(TestCase):
         self.assertEqual(response2.status_code, 302)
         self.assertRedirects(response2, settings.LOGIN_REDIRECT_URL)
 
+        response3 = self.client.get(reverse('accounts:register'))
+        self.assertEqual(response3.status_code, 302)
+        self.assertRedirects(response3, settings.LOGIN_REDIRECT_URL)
+
     def test_view_home(self):
         self.client.login(username='user7', password='secret')
         response1 = self.client.get(reverse('home:home'))
