@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from accounts.models import UserProfile
 from flats.models import FlatProfile
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 class HomeTestCase(TestCase):
     def setUp(self):
@@ -24,6 +25,19 @@ class HomeTestCase(TestCase):
         self.flat5 = FlatProfile.objects.create(user=self.user5)
         self.flat6 = FlatProfile.objects.create(user=self.user6)
         self.flat7 = FlatProfile.objects.create(user=self.user7)
+
+    def test_middleware_login(self):
+        response1 = self.client.get(reverse('home:home'))
+        self.assertEqual(response1.status_code, 302)
+        self.assertRedirects(response1, settings.LOGIN_URL)
+
+        data = {
+            'username': 'user7',
+            'password': 'secret',
+        }
+        response2 = self.client.post(reverse('accounts:login'), data)
+        self.assertEqual(response2.status_code, 302)
+        self.assertRedirects(response2, settings.LOGIN_REDIRECT_URL)
 
     def test_view_home(self):
         self.client.login(username='user7', password='secret')
