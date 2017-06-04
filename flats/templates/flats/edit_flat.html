@@ -10,8 +10,8 @@
 
 {% block body %}
 <div class="container">
+  <img class="middle" src="http://downloadicons.net/sites/default/files/button-home-house-icon-63650.png" alt="dsa" width="200" >
   <h1>Edit Flat</h1>
-
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ flat_form.as_p }}
