@@ -92,7 +92,7 @@ class UserProfile(Profile):
     region = models.CharField(max_length=20, default='',blank=True)
     university = models.CharField(max_length=20,default='',blank=True)
     faculty = models.CharField(max_length=30,default='',blank=True)
-    prefered_cuisine = models.CharField(max_length=10, default='', choices=CUISINE_CHOICES)
+    prefered_cuisine = models.CharField(max_length=15, default='', choices=CUISINE_CHOICES)
 
     def __str__(self):
         return "Profile of {0}".format(self.user.username)
