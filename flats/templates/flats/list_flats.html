@@ -61,7 +61,7 @@
       <form id="flatform" method="get" action="">
 
         <h3>{{ flat.name }}</h3>
-        <p>{{ flat.description|truncatewords_html:80 }}</p>
+        <p>{{ flat.description|truncatewords_html:20 }}</p>
         <p><a href="{% url 'flats:view_flat' flat.id %}">Show more</a>
     {% empty %}
 

@@ -16,12 +16,12 @@
     <tr>
         <td>
         {% if flat.image %}
-            <img src="{{ flat.image.url }}"  width = "100" height = "100"/>
+            <img id="icon" src="{{ flat.image.url }}">
         {% endif %}
         </td>
         <td><a href="{% url 'flats:view_flat' flat.id %}">
         <h3>{{ flat.name }}</h3></a></td>
-        <td>{{ flat.description }}</td>
+        <td>{{ flat.description|truncatewords_html:20 }}</td>
     </tr>
     {% empty %}
       <p>No flat available.</p>
@@ -36,12 +36,12 @@
     <tr>
         <td>
             {% if user.image %}
-                <img src="{{ user.image.url }}"  width = "100" height = "100"/>
+                <img id="icon" src="{{ user.image.url }}">
             {% endif %}
         </td>
         <td><a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
         <h3>{{ user.user.username }}</h3></a></td>
-        <td>{{ user.description }}</td>
+        <td>{{ user.description|truncatewords_html:20 }}</td>
     </tr>
     {% empty %}
       <p>No user available.</p>

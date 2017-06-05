@@ -80,6 +80,10 @@ img.middle {
     margin-right: auto;
 }
 
-#navbar {
-    border-style: solid SteelBlue;
+#imgprofile {
+    max-width: 250px;
+}
+
+#icon {
+    max-height: 100px;
 }

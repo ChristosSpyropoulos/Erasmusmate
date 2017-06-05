@@ -48,7 +48,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
 
     # additionnal content
-    description = models.CharField(max_length=200,blank=True)
+    description = models.TextField(max_length=500,blank=True)
     image = models.ImageField(upload_to='profile_image', blank=True)
     date = models.DateTimeField(auto_now_add=True, auto_now=False)
 
